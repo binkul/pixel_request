@@ -2,6 +2,7 @@ package com.example.pixel_request.service;
 
 import com.example.pixel_request.algorithm.Luhna;
 import com.example.pixel_request.algorithm.NearestNeighbor;
+import com.example.pixel_request.exception.InvalidArgumentsException;
 import com.example.pixel_request.mapper.PointMapper;
 import com.example.pixel_request.position.Point;
 import com.example.pixel_request.position.PointList;
@@ -21,12 +22,16 @@ public class PixelService {
     private final PointMapper mapper;
 
     public String getControl(String digits) {
+        if (digits.length() == 0) throw new InvalidArgumentsException("Value is empty. The result is undetermined");
         int result = Luhna.generate(digits, false);
+
         return "Control sum of '" + digits + "' is: " + result;
     }
 
     public String checkControlSum(String digits) {
+        if (digits.length() == 0) throw new InvalidArgumentsException("Value is empty. The result is undetermined");
         String result = Luhna.generate(digits, true) == 0 ? "correct" : "incorrect";
+
         return "The number '" + digits + "' is " + result;
     }
 
