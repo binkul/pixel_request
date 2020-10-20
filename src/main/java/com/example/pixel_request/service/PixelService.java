@@ -12,8 +12,8 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-@Service
 @RequiredArgsConstructor
+@Service
 public class PixelService {
 
     private final Luhna luhna;

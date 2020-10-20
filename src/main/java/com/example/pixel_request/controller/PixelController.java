@@ -1,14 +1,10 @@
 package com.example.pixel_request.controller;
 
-import com.example.pixel_request.position.dto.PointDto;
 import com.example.pixel_request.position.dto.PointSetDto;
 import com.example.pixel_request.service.PixelService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.ArrayList;
-import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
