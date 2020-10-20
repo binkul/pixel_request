@@ -1,35 +1,43 @@
 package com.example.pixel_request.algorithm;
 
 import com.example.pixel_request.position.Point;
+import lombok.Getter;
 import org.springframework.stereotype.Component;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
+@Getter
 @Component
 public class NearestNeighbor {
 
     private final Validator validator;
-    private BigDecimal shortDistance;
+    private BigDecimal distance;
 
     public NearestNeighbor() {
         validator = new Validator();
-        shortDistance = BigDecimal.ZERO;
+        distance = BigDecimal.ZERO;
     }
 
     public List<Point> getShortestDistance(List<Point> points) {
         List<Point> result = new ArrayList<>();
         List<Point> tmpSet;
         BigDecimal tmpDistance = BigDecimal.ONE;
+        boolean firstLoop = true;
 
         for (int i = 0; i < points.size(); i++) {
-            shortDistance = BigDecimal.ZERO;
             clearVisit(points);
             tmpSet = getDistanceFromPoint(points, i);
-            if (shortDistance.compareTo(tmpDistance) <= 0) {
-                tmpDistance = shortDistance;
+            if (firstLoop) {
+                tmpDistance = distance;
                 result = tmpSet;
+                firstLoop = false;
+            } else {
+                if (distance.compareTo(tmpDistance) <= 0) {
+                    tmpDistance = distance;
+                    result = tmpSet;
+                }
             }
         }
 
@@ -44,6 +52,7 @@ public class NearestNeighbor {
         validator.Validate(points, start);
         if (points.size() == 1) return points;
 
+        distance = BigDecimal.ZERO;
         startPoint = points.get(start);
         startPoint.setVisited(true);
 
@@ -60,7 +69,7 @@ public class NearestNeighbor {
     }
 
     private Point findNearest(List<Point> points, Point startPoint) {
-        BigDecimal oldDistance = BigDecimal.ZERO;
+        BigDecimal shortDistance = BigDecimal.ZERO;
         BigDecimal newDistance;
         Point nearestPoint = startPoint;
         boolean firstLoop = true;
@@ -70,17 +79,17 @@ public class NearestNeighbor {
 
             newDistance = getDistance(startPoint, point);
             if (firstLoop) {
-                oldDistance = newDistance;
+                shortDistance = newDistance;
                 nearestPoint = point;
                 firstLoop = false;
             } else {
-                if (oldDistance.compareTo(newDistance) > 0) {
-                    oldDistance = newDistance;
+                if (shortDistance.compareTo(newDistance) > 0) {
+                    shortDistance = newDistance;
                     nearestPoint = point;
-                    shortDistance = shortDistance.add(newDistance);
                 }
             }
         }
+        distance = distance.add(shortDistance);
 
         return nearestPoint;
     }

@@ -1,6 +1,6 @@
 package com.example.pixel_request.controller;
 
-import com.example.pixel_request.position.dto.PointSetDto;
+import com.example.pixel_request.position.dto.PointListDto;
 import com.example.pixel_request.service.PixelService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.MediaType;
@@ -24,12 +24,12 @@ public class PixelController {
     }
 
     @PostMapping(value = "/knn", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-    public PointSetDto solveNeighbor(@RequestBody PointSetDto pointSetDto, @RequestParam("start") Integer start) {
-        return pixelService.solveNeighbor(pointSetDto, start);
+    public PointListDto solveNeighbor(@RequestBody PointListDto pointListDto, @RequestParam("start") Integer start) {
+        return pixelService.solveNeighbor(pointListDto, start);
     }
 
     @PostMapping(value = "/knn/short", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-    public PointSetDto solveShortNeighbor(@RequestBody PointSetDto pointSetDto) {
-        return pixelService.solveShortNeighbor(pointSetDto);
+    public PointListDto solveShortNeighbor(@RequestBody PointListDto pointListDto) {
+        return pixelService.solveShortNeighbor(pointListDto);
     }
 }

@@ -10,6 +10,6 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
-public class PointSet {
+public class PointList {
     private List<Point> points = new ArrayList<>();
 }

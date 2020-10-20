@@ -1,14 +1,15 @@
 package com.example.pixel_request.position.dto;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 
 import java.util.List;
 
-@NoArgsConstructor
 @AllArgsConstructor
 @Getter
-public class PointSetDto {
+@JsonIgnoreProperties(ignoreUnknown = true)
+public class PointListDto {
+    private String distance;
     private List<PointDto> pointSet;
 }
