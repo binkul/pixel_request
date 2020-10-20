@@ -27,4 +27,9 @@ public class PixelController {
     public PointSetDto solveNeighbor(@RequestBody PointSetDto pointSetDto, @RequestParam("start") Integer start) {
         return pixelService.solveNeighbor(pointSetDto, start);
     }
+
+    @PostMapping(value = "/knn/short", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    public PointSetDto solveShortNeighbor(@RequestBody PointSetDto pointSetDto) {
+        return pixelService.solveShortNeighbor(pointSetDto);
+    }
 }

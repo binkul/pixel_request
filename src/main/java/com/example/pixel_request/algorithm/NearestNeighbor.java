@@ -12,7 +12,34 @@ import java.util.List;
 @Component
 public class NearestNeighbor {
 
-    public List<Point> Generator(List<Point> points, int start) {
+    private BigDecimal shortDistance;
+
+    public List<Point> getShortestDistance(List<Point> points) {
+        List<Point> result = new ArrayList<>();
+        List<Point> tmpSet;
+        BigDecimal tmpDistance = BigDecimal.ZERO;
+        boolean firstLoop = true;
+
+        for (int i = 0; i < points.size(); i++) {
+            shortDistance = BigDecimal.ZERO;
+            clearVisit(points);
+            tmpSet = getDistanceFromPoint(points, i);
+            if (firstLoop) {
+                tmpDistance = shortDistance;
+                result = tmpSet;
+                firstLoop = false;
+            } else {
+                if (shortDistance.compareTo(tmpDistance) <= 0) {
+                    tmpDistance = shortDistance;
+                    result = tmpSet;
+                }
+            }
+        }
+
+        return result;
+    }
+
+    public List<Point> getDistanceFromPoint(List<Point> points, int start) {
         List<Point> result = new ArrayList<>();
         Point startPoint;
         Point nearestPoint;
@@ -44,15 +71,16 @@ public class NearestNeighbor {
         for (Point point : points) {
             if (point.isVisited()) continue;
 
+            newDistance = getDistance(startPoint, point);
             if (firstLoop) {
-                oldDistance = getDistance(startPoint, point);
+                oldDistance = newDistance;
                 nearestPoint = point;
                 firstLoop = false;
             } else {
-                newDistance = getDistance(startPoint, point);
                 if (oldDistance.compareTo(newDistance) > 0) {
                     oldDistance = newDistance;
                     nearestPoint = point;
+                    shortDistance = shortDistance.add(newDistance);
                 }
             }
         }
@@ -63,5 +91,11 @@ public class NearestNeighbor {
         BigDecimal x_dif = end.getX().subtract(start.getX());
         BigDecimal y_dif = end.getY().subtract(start.getY());
         return x_dif.pow(2).add(y_dif.pow(2));
+    }
+
+    private void clearVisit(List<Point> points) {
+        for (Point point : points) {
+            point.setVisited(false);
+        }
     }
 }

@@ -7,7 +7,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class Luhna {
 
-    public int Generator(String digits, boolean check) {
+    public int generate(String digits, boolean check) {
         int sum = 0;
         String fullNumber = clean(digits);
         fullNumber = check ? fullNumber : fullNumber + "0";
