@@ -7,7 +7,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class Luhna {
 
-    public int generate(String digits, boolean check) {
+    public static int generate(String digits, boolean check) {
         int sum = 0;
         String fullNumber = clean(digits);
         fullNumber = check ? fullNumber : fullNumber + "0";
@@ -24,7 +24,7 @@ public class Luhna {
         return sum % 10 == 0 ? 0 : 10 - (sum % 10);
     }
 
-    private String clean(String roughNumber) {
+    private static String clean(String roughNumber) {
         String cleanNumber = roughNumber.replaceAll("\\s", "");
         cleanNumber = cleanNumber.replaceAll("_", "");
         cleanNumber = cleanNumber.replaceAll("-", "");

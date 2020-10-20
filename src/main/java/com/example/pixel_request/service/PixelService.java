@@ -15,17 +15,16 @@ import java.util.List;
 @Service
 public class PixelService {
 
-    private final Luhna luhna;
     private final NearestNeighbor nearestNeighbor;
     private final PointMapper mapper;
 
     public String getControl(String digits) {
-        int result = luhna.generate(digits, false);
+        int result = Luhna.generate(digits, false);
         return "Control sum of '" + digits + "' is: " + result;
     }
 
     public String checkControlSum(String digits) {
-        String result = luhna.generate(digits, true) == 0 ? "correct" : "incorrect";
+        String result = Luhna.generate(digits, true) == 0 ? "correct" : "incorrect";
         return "The number '" + digits + "' is " + result;
     }
 
