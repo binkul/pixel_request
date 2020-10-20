@@ -29,6 +29,7 @@ public class Luhna {
         cleanNumber = cleanNumber.replaceAll("_", "");
         cleanNumber = cleanNumber.replaceAll("-", "");
         cleanNumber = cleanNumber.replaceAll(":", "");
+
         return cleanNumber;
     }
 }

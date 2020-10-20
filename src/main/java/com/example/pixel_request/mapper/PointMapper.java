@@ -32,6 +32,7 @@ public class PointMapper {
         List<PointDto> pointDtos = points.stream()
                 .map(i -> new PointDto(i.getName(), i.getX().toString(), i.getY().toString()))
                 .collect(Collectors.toList());
+
         return new PointSetDto(pointDtos);
     }
 }
