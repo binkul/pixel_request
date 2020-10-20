@@ -3,8 +3,8 @@ package com.example.pixel_request.algorithm;
 import lombok.NoArgsConstructor;
 import org.springframework.stereotype.Component;
 
-@Component
 @NoArgsConstructor
+@Component
 public class Luhna {
 
     public int Generator(String digits, boolean check) {
