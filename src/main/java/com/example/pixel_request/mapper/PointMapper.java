@@ -14,7 +14,7 @@ import java.util.stream.Collectors;
 public class PointMapper {
 
     private Point mapToPoint(PointDto pointDto) {
-        return new Point(pointDto.getName(), new BigDecimal(pointDto.getX()), new BigDecimal(pointDto.getY()));
+        return new Point(pointDto.getName(), new BigDecimal(pointDto.getX()), new BigDecimal(pointDto.getY()), false);
     }
 
     public PointSet mapToPointSet(PointSetDto pointSetDto) {

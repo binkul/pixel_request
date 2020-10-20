@@ -30,9 +30,9 @@ public class PixelService {
         return "The number '" + digits + "' is " + result;
     }
 
-    public PointSetDto solveNeighbor(PointSetDto pointSetDto) {
+    public PointSetDto solveNeighbor(PointSetDto pointSetDto, Integer start) {
         PointSet pointSet = mapper.mapToPointSet(pointSetDto);
-        List<Point> points = nearestNeighbor.Generator(pointSet.getPoints(), 0);
+        List<Point> points = nearestNeighbor.Generator(pointSet.getPoints(), start);
         return mapper.mapToPointSetDto(points);
     }
 }
