@@ -22,15 +22,15 @@ public class PixelService {
     private final PointMapper mapper;
 
     public String getControl(String digits) {
-        if (digits.length() == 0) throw new InvalidArgumentsException("Value is empty. The result is undetermined");
-        int result = Luhna.generate(digits, false);
+        String value = checkValue(digits);
+        int result = Luhna.generate(value, false);
 
         return "Control sum of '" + digits + "' is: " + result;
     }
 
     public String checkControlSum(String digits) {
-        if (digits.length() == 0) throw new InvalidArgumentsException("Value is empty. The result is undetermined");
-        String result = Luhna.generate(digits, true) == 0 ? "correct" : "incorrect";
+        String value = checkValue(digits);
+        String result = Luhna.generate(value, true) == 0 ? "correct" : "incorrect";
 
         return "The number '" + digits + "' is " + result;
     }
@@ -50,5 +50,21 @@ public class PixelService {
     private BigDecimal getDistance() {
         MathContext mc = new MathContext(6);
         return nearestNeighbor.getDistance().sqrt(mc);
+    }
+
+    private String checkValue(String value) {
+        String result = cleanValue(value);
+        if (result.length() == 0) throw new InvalidArgumentsException("Value is empty. The result is undetermined");
+        return result;
+    }
+
+    private String cleanValue(String value) {
+        StringBuilder result = new StringBuilder();
+        for (int i = 0; i < value.length(); i++) {
+            char tmp = value.charAt(i);
+            if (tmp >= '0' && tmp <= '9')
+                result.append(tmp);
+        }
+        return result.toString();
     }
 }

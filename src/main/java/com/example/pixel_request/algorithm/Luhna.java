@@ -9,8 +9,7 @@ public class Luhna {
 
     public static int generate(String digits, boolean check) {
         int sum = 0;
-        String fullNumber = clean(digits);
-        fullNumber = check ? fullNumber : fullNumber + "0";
+        String fullNumber = check ? digits : digits + "0";
 
         for (int i = 0; i <= fullNumber.length() - 1; i++) {
             int digit = fullNumber.charAt(fullNumber.length() - 1 - i) ^ '0';
@@ -22,14 +21,5 @@ public class Luhna {
         }
 
         return sum % 10 == 0 ? 0 : 10 - (sum % 10);
-    }
-
-    private static String clean(String roughNumber) {
-        String cleanNumber = roughNumber.replaceAll("\\s", "");
-        cleanNumber = cleanNumber.replaceAll("_", "");
-        cleanNumber = cleanNumber.replaceAll("-", "");
-        cleanNumber = cleanNumber.replaceAll(":", "");
-
-        return cleanNumber;
     }
 }
